@@ -15,7 +15,9 @@ def sl_compile(sl_input):
 
     #parse the slatt file. 
     with open(slatt_file) as slatt:
+
         for num, line in enumerate(slatt, 1):
+            
             #search for "ok!" at end of file
             if lineList[len(lineList) - 1].split()[0] != "ok!" or num == 1 and "**slatt!**" not in line:
                 if lineList[len(lineList) - 1].split()[0] != "ok!":
@@ -26,8 +28,8 @@ def sl_compile(sl_input):
             else:
                 line = line.replace("**slatt!**", "")
                 line = line.replace("ok!", "")
-
-            #function to parse slatt file and compile to python
+            #need to end up adding more actions. 
+            #function to parse slatt file and compile to python\
             def parse():
                 global slatt_file
                 global line
@@ -65,7 +67,33 @@ def sl_compile(sl_input):
                     parse()
                 else:
                     os.system("echo '{0}' >> /tmp/{1}.py".format(line, slatt_file))
+  
             parse()
-            
+    
+    print("""\n//.............................................................................................................................................
+//.................................................................OOOOO...................CCCCC...............................................
+//.PPPPPPPPPPP.PLLLL..........AAAAA..AAYYY...YYYYYYYBBBBBBBB.....OOOOOOOOO..OOOII........CCCCCCCC......AAAAAA....AARRRRRRRRR.RRRTTTTTTTTTTIII..
+//.PPPPPPPPPPPPPLLLL..........AAAAAA.AAYYY..YYYYYYYYBBBBBBBBB...BOOOOOOOOOO.OOOII....... CCCCCCCCC.....AAAAAA....AARRRRRRRRRRRRRTTTTTTTTTTIII..
+//.PPPPPPPPPPPPPLLLL.........AAAAAAA..AYYYY.YYYYY.YYBBBBBBBBBB.BBOOOOOOOOOOOOOOII...... CCCCCCCCCC...AAAAAAA....AARRRRRRRRRRRRRTTTTTTTTTTIII..
+//.PPPPP..PPPPPPLLLL.........AAAAAAA..AYYYY.YYYY..YYBB...BBBBB.BBOOO...OOOOOOOOII...... CCC..CCCCC...AAAAAAAA...AARR...RRRRR...TTTTT...TTIII..
+//.PPPPP...PPPPPLLLL........AAAAAAAAA..YYYYYYYYY..YYBB.BBBBBBBBBBOO.....OOOOOOOII..... CC....CCCC...AAAAAAAA...AARR....RRRR...TTTTT...TTIII..
+//.PPPPPPPPPPPPPLLLL........AAAAAAAAA..YYYYYYYY...YYBBBBBBBBB.BBBOO.....OOOOOOOII..... CC..........CAAAAAAAA...AARRRRRRRRRR...TTTTT...TTIII..
+//.PPPPPPPPPPPPPLLLL........AAAA.AAAAA..YYYYYYY...YYBBBBBBBBBBBBBOO.....OOOOOOOII..... CC..........CAAAAAAAAA..AARRRRRRRRR....TTTTT...TTIII..
+//.PPPPPPPPPPP.PLLLL.......AAAAAAAAAAA...YYYYY....YYBBBBBBBBBBBBBOO.....OOOOOOOII..... CC..........CAAAAAAAAA..AARRRRRRRRRR...TTTTT...TTIII..
+//.PPPPPPPPPP..PLLLL.......AAAAAAAAAAA...YYYYY....YYBB....BBBBBBBOO.....OOOOOOOII..... CC....CCCC.CCAAAAAAAAA..AARRRRRRRRRR...TTTTT...TTIII..
+//.PPPPP.......PLLLL.......AAAAAAAAAAAA..YYYYY....YYBB...BBBBB.BBOOO...OOOOOOOOII...... CCC..CCCCC.CCAAAAAAAAAA.AARR...RRRRR...TTTTT...TTIII..
+//.PPPPP.......PLLLLLLLLLLLAAAAAAAAAAAA..YYYYY....YYBBBBBBBBBB.BBOOOOOOOOOOOOOOII...... CCCCCCCCCC.CCAAAAAAAAAA.AARR...RRRRR...TTTTT...TTIII..
+//.PPPPP.......PLLLLLLLLLLLAAAA...AAAAA..YYYYY....YYBBBBBBBBBB..BOOOOOOOOOO.OOOII....... CCCCCCCCC.CCCAA....AAAAAAARR...RRRRR...TTTTT...TTIII..
+//.PPPPP.......PLLLLLLLLLLLAAA.....AAAAY.YYYYY....YYBBBBBBBBB....OOOOOOOOO..OOOII........CCCCCCCC..CCCAA....AAAAAAARR...RRRRR...TTTTT...TTIII..
+//.................................................................OOOOO..................CCCCCC...............................................
+//.............................................................................................................................................\n""")
+
+    #got this to print out now finally took ages. 
+    text = [string.strip('\n') for string in lineList if string != '']
+    templist = list(filter(None, text))
+    
+    for word in templist:
+        print(word)
+
     os.system("python /tmp/{0}.py".format(slatt_file))
     os.remove("/tmp/{0}.py".format(slatt_file))
