@@ -15,15 +15,6 @@ def sl_compile(sl_input):
 
     #parse the slatt file. 
     with open(slatt_file) as slatt:
-        # if(cartinese == True):
-        #     tempLine = ""
-        #     for num, line in enumerate(slatt, 1):
-                
-
-
-
-        # else:
-
             for num, line in enumerate(slatt, 1):
                 
                 #search for "ok!" at end of file
@@ -75,6 +66,13 @@ def sl_compile(sl_input):
                     #input statement
                     elif "wokeuplike*(" in line:
                         line = line.replace("wokeuplike*", "input")
+                        parse()
+                    elif "felt. .$like **- this" in line:
+                        line = line.replace("felt. .$like **- this", "while")   
+                        parse()
+                        #add for loops as well. 
+                    elif "!*lean" in line: 
+                        line = line.replace("!*lean", "for")
                         parse()
                     else:
                         os.system("echo '{0}' >> /tmp/{1}.py".format(line, slatt_file))
