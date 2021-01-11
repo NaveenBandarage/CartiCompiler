@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from livereload import server
+from livereload import Server
 app = Flask(__name__)
 
 @app.route('/')
